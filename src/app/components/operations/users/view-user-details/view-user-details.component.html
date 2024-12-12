@@ -1,0 +1,31 @@
+<div class="d-flex flex-column align-items-center">
+  <img
+    [src]="itemDate?.avatar"
+    class="rounded-circle border border-white w-125px h-125px mb-2"
+    [alt]="itemDate?.first_name"
+  />
+  <div class="mb-2">
+    <h3 class="mb-2 text14">
+      {{ itemDate?.first_name }} {{ itemDate?.last_name }}
+    </h3>
+    <h6>{{ itemDate?.email }}</h6>
+  </div>
+  <div class="d-flex align-items-center">
+    <button
+      type="button"
+      class="btn btn-primary me-2 w-110px"
+      (click)="editItem(itemDate)"
+    >
+      <mat-icon class="valign-middle">edit</mat-icon>
+      {{ "EDIT" | translate }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-primary border-radius20 box-shadow1 w-110px"
+      (click)="deleteItem(itemDate)"
+    >
+      <mat-icon class="valign-middle">delete</mat-icon>
+      {{ "DELETE" | translate }}
+    </button>
+  </div>
+</div>

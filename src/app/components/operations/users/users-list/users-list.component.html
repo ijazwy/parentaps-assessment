@@ -1,0 +1,112 @@
+<app-page-header
+  [title]="'USERS'"
+  [activeTitle]="'HOME'"
+  [activeSubTitle]="'OPERATIONS'"
+  [activeSubLink]="'/operations/users'"
+  [title1]="'USERS'"
+  [showActionBtn]="true"
+  [actionLabel]="'NEW_USER'"
+  [actionIcon]="'add'"
+  (onInnerActionEmitted)="onPageActionEmitted($event)"
+></app-page-header>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-12">
+          <div class="card main-card border-0 my-10 position-relative">
+            <div class="card-body p-4">
+              @if(isLoading){
+              <div class="mx-auto">
+                <mat-spinner
+                  class="mx-auto"
+                  strokeWidth="3"
+                  [diameter]="50"
+                ></mat-spinner>
+                <div class="text-center fs-5 mt-1">
+                  {{ "Fetching_Data" | translate }} ...
+                </div>
+              </div>
+              } @if(!isLoading){
+              <ng-container *ngIf="itemDataList.length > 0; else noDataFound">
+                <div class="list-group list-group-flush users-list">
+                  @for(user of itemDataList; track user; let index = $index){
+                  <a
+                    href="javascript:;"
+                    class="list-group-item list-group-item-action p-4"
+                    [ngClass]="selectedIndex === index ? 'active' : ''"
+                    (click)="viewUserDetails(user, index)"
+                  >
+                    <div class="d-flex w-100 justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <img
+                          [src]="user?.avatar"
+                          class="rounded-circle w-55px h-55px me-2"
+                          [alt]="user?.first_name"
+                        />
+                        <div>
+                          <h5 class="mb-1">
+                            {{ user?.first_name }} {{ user?.last_name }}
+                          </h5>
+                          <!-- <small>{{user?.email}}</small> -->
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <button
+                          type="button"
+                          class="btn btn-outline-primary me-2"
+                        >
+                          <mat-icon class="valign-middle">edit</mat-icon>
+                        </button>
+                        <button type="button" class="btn btn-outline-primary">
+                          <mat-icon class="valign-middle">delete</mat-icon>
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-link text-primary"
+                          #tooltip="matTooltip"
+                          matTooltip="{{ 'VIEW' | translate }}"
+                          (click)="viewUserDetails(user, index)"
+                        >
+                          <mat-icon class="valign-middle"
+                            >keyboard_arrow_right</mat-icon
+                          >
+                        </button>
+                      </div>
+                    </div>
+                  </a>
+                  }
+                </div>
+              </ng-container>
+              <ng-template #noDataFound>
+                <app-no-data-found [showResetBtn]="false"></app-no-data-found>
+              </ng-template>
+              }
+            </div>
+
+            @if(showDetailsPanel){
+            <div class="card text-bg-light details-card">
+              <div class="card-body">
+                <div class="text-end">
+                  <button
+                    type="button"
+                    class="btn btn-link text-primary"
+                    (click)="closeDetailsPanel()"
+                  >
+                    <mat-icon class="valign-middle">close</mat-icon>
+                  </button>
+                </div>
+                <app-view-user-details
+                  [itemDate]="selectedItem"
+                  (onInnerActionEmmited)="onInnerActionEmmited($event)"
+                  (onInnerEditEmitted)="onInnerEditEmitted($event)"
+                ></app-view-user-details>
+              </div>
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

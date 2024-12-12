@@ -1,0 +1,91 @@
+<header class="w-100 bg-white mb-1">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between py-3">
+      <a class="navbar-brand" href="javascript:void(0);" routerLink="/pages/home">
+        <img src="./assets/images/Logo.png" alt="{{ 'APPNAME' | translate }}" width="123" height="40">
+      </a>
+    
+      <ul class="nav nav-pills">
+        @for(item of items; track item; let first = $first){
+        <li class="nav-item me-2">
+          <a
+            href="javascript:;"
+            [routerLink]="item.path"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: first}"
+            class="nav-link text-uppercase"
+            aria-current="page"
+            >{{ item.title! | translate }}</a
+          >
+        </li>
+        }
+        <li class="nav-item me-2" *ngIf="isLogged()">
+          <a
+            href="javascript:;"
+            routerLink="/operations/users"
+            routerLinkActive="active"
+            class="nav-link text-uppercase"
+            aria-current="page"
+            >{{ "ENQUIRE" | translate }}</a
+          >
+        </li>
+        <li class="nav-item me-2" *ngIf="!isLogged()">
+          <a
+            href="javascript:;"
+            routerLink="/auth/login"
+            routerLinkActive="active"
+            class="nav-link text-uppercase"
+            aria-current="page"
+            >{{ "LOGIN_BUTTON" | translate }}</a
+          >
+        </li>
+        <li class="nav-item me-2" *ngIf="isLogged()">
+          <a
+            href="javascript:;"            
+            routerLinkActive="active"
+            class="nav-link text-uppercase"
+            aria-current="page"
+            (click)="doLogOut()"
+            >{{ "LOGOUT" | translate }}</a
+          >
+        </li>
+        <li class="nav-item">
+          <ng-container
+            *ngIf="selectedLang === locale.English || !selectedLang;
+              else englishLang
+            "
+          >
+            <button
+              type="button"
+              class="btn btn-link text-uppercase"
+              (click)="changeLanguage(locale.Danish)"
+              title="{{ 'SWITCH_TO' | translate }} {{ locale.Danish | translate }}"
+            >
+              <img
+                src="./assets/images/flags/den_flag.jpg"
+                alt="{{ locale.Danish | translate }}"
+                class="h-20px rounded"
+              />
+           </button>
+
+            
+          </ng-container>
+          <ng-template #englishLang>
+            <button
+              type="button"
+              class="btn btn-link text-uppercase"
+              (click)="changeLanguage(locale.English)"
+              title="{{ 'SWITCH_TO' | translate }} {{ locale.English | translate }}"
+            >
+              <img
+                src="./assets/images/flags/us_flag.jpg"
+                alt="{{ locale.English | translate }}"
+                class="h-20px rounded"
+              />
+            </button>
+          </ng-template>
+        </li>
+      </ul>
+    </div>  
+  </div>
+</header>

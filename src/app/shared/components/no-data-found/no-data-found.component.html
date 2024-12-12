@@ -1,0 +1,18 @@
+<div class="d-flex flex-center flex-column">
+  <img
+    [src]="notFoundImage"
+    class="img-fluid mw-110px my-4"
+    alt="not-found"
+  />
+  <span class="fs-4 text-center my-4">
+    {{ notFoundMsg | translate }}
+  </span>
+  <button
+    *ngIf="showResetBtn"
+    type="button"
+    class="btn btn-primary w-150px box-shadow2"
+    (click)="resetData()"
+  >
+    {{ "RESET_DATA" | translate }}
+  </button>
+</div>

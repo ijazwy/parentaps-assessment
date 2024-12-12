@@ -1,0 +1,37 @@
+<section class="page-header mb-4">
+  <div class="container">
+    <div class="d-flex flex-column p-4 breadcrumb-holder">
+      <nav aria-label="breadcrumb" class="w-100">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="javascript:void(0);" [routerLink]="activeLink">{{
+              activeTitle | translate
+            }}</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a
+              href="javascript:void(0);"
+              *ngIf="activeSubTitle"
+              [routerLink]="activeSubLink"
+              >{{ activeSubTitle | translate }}</a
+            >
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            {{ title1 | translate }}
+          </li>
+        </ol>
+      </nav>
+      <div class="w-100 d-flex justify-content-between">
+        <h3 class="h3 text12">{{ title | translate }}</h3>
+        <button
+          class="btn btn-primary btn-lg"
+          *ngIf="showActionBtn"
+          (click)="onAtionEmitted()"
+        >
+          <mat-icon class="valign-middle">{{ actionIcon }}</mat-icon>
+          {{ actionLabel | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

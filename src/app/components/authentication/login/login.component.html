@@ -1,0 +1,98 @@
+<div class="container d-flex align-items-center">  
+<div class="card main-card w-75 w-sm-100 mx-auto mt-5">
+ <div class="row g-0">
+  <div class="col-md-5 d-none d-md-block">
+    <img src="./assets/images/login-bg.png" class="img-fluid rounded-start w-100" alt="login-bg"/>
+  </div>
+  <div class="col-md-7">
+    <div class="card-body p-4 h-100 d-flex w-100 align-items-center">
+      <form [formGroup]="loginForm" (ngSubmit)="Submit()" class="w-100">
+        <div class="divider d-flex flex-column align-items-start my-4">
+          <h3 class="text-start">{{"WELCOME_BACK" | translate}} !</h3>
+          <p class="fs-5">{{"PLEASE_LOGIN_TO_ACCESS" | translate}} <span class="text-primary">{{"APPNAME" | translate}}</span> {{"DASHBOARD" | translate}}</p>
+        </div>
+
+        <!-- Email input -->
+        <div  class="form-outline mb-4">
+          <label class="form-label" for="signin-username">{{"USERNAME" | translate}}</label>
+          <input
+            type="text"
+            class="form-control form-control-lg w-full"
+            placeholder="{{'ENTER' | translate}} {{'USERNAME' | translate}}"
+            id="signin-username"
+            name="username"
+            formControlName="username"
+          />
+          <span id="usernameHelpInline" class="form-text">
+            eve.holt&#64;reqres.in
+          </span>
+        <div
+          *ngIf="
+            f['username']?.hasError('required') && f['username']?.touched
+          "
+          class="mat-error text-danger"
+        >
+          {{ "USERNAME" | translate }}
+          {{ "IS_REQUIRED" | translate }}
+        </div>
+        </div>
+
+        <!-- Password input -->
+        <div  class="form-outline mb-3">
+          <label class="form-label" for="signin-password">{{"PASSWORD" | translate}}</label>
+          <div class="input-group">
+            <input
+              type="password"
+              class="form-control form-control-lg"
+              id="signin-password"
+              placeholder="{{'ENTER' | translate}} {{'PASSWORD' | translate}}"
+              [type]="showPassword ? 'text' : 'password'"
+              name="password"
+              formControlName="password"
+            />
+            <button
+              aria-label="button"
+              type="button"
+              class="btn btn-outline-secondary"
+              (click)="toggleVisibility()"
+              id="button-addon2"
+            >
+              <i class="ri-eye- align-middle"></i>
+              <mat-icon class="valign-middle" matSuffix>{{ toggleClass }}</mat-icon>
+            </button>                  
+          </div>
+          <span id="passwordHelpInline" class="form-text">
+            cityslicka
+          </span>
+          <div
+              *ngIf="
+                f['password']?.hasError('required') && f['password']?.touched
+              "
+              class="mat-error text-danger"
+            >
+              {{ "PASSWORD" | translate }}
+              {{ "IS_REQUIRED" | translate }}
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center">
+          <a href="javascript:void(0);" class="text-primary">{{"FORGET_PASSWORD" | translate }}</a>
+          <button type="submit" class="btn btn-primary text-uppercase login-btn">
+            <ng-container *ngIf="isLoading">
+              <span class="indicator-progress text-capitalize" [style.display]="'block'">
+                {{ "PLEASE_WAIT" | translate }} ...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"
+                ></span>
+              </span>
+            </ng-container>
+            <ng-container *ngIf="!isLoading">
+              <span class="indicator-label">{{ "LOGIN_BUTTON" | translate }}</span>
+            </ng-container>
+          </button>
+        </div>  
+      </form>
+    </div>
+  </div>
+ </div>
+</div>
+</div>

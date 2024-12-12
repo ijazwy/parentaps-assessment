@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="d-flex align-items-center justify-content-between">
+      <div>
+        <h1 class="fw-bold text-gray-900 mb-4">
+          {{ "SYSTEM_ERROR" | translate }} !
+        </h1>
+        <!--end::Title-->
+    
+        <!--begin::Text-->
+        <div class="fs-4 mb-4">
+            {{ 'SOMTING_WENT_WRONG' | translate}}  {{ 'PLEASE_TRY_AGAIN_LATER' | translate}}
+        </div>
+        <!--end::Text-->
+    
+        <!--begin::Link-->
+        <div class="mb-0">
+          <a
+            routerLink="/pages/home"
+            class="btn btn-primary btn-lg font-semibold"
+            >{{ "BACK_TO_HOME" | translate }}</a
+          >
+        </div>
+        <!--end::Link-->
+      </div>
+    
+      <!--begin::Illustration-->
+      <div class="mb-3">
+        <img
+          src="./assets/images/auth/error-500.png"
+          class="img-fluid m-w-500px"
+          alt="error 500"
+        />
+      </div>
+      <!--end::Illustration-->
+    </div>
+    
+  </div>
